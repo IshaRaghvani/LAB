@@ -1,25 +1,15 @@
-echo "Enter a string : "
+echo "Enter a string: "
 read string
-echo "Enter a substring : "
+echo "Enter a substring: "
 read substr
+
 count=0
-l=${#string}
-let l--
-for i in $(seq 0 $l)
+for ((i=0; i<${#string}; i++)); 
 do
-    v=$i
-    for j in $(seq $v $l)
-    do
-        c=$c${string:$j:1}
-        if [ $c = "" ]
-        then
-            break
-        fi
-        if [ $c = $substr ]
-        then 
-            let count++
-        fi
-    done
-    c=""
+    if [[ "${string:i:${#substr}}" == "$substr" ]]; 
+    then
+        let count++
+    fi
 done
-echo "Number of occurences of substring $substr in $string is $count"
+
+echo "Number of occurrences of substring $substr in $string is $count"
